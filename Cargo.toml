@@ -1,0 +1,12 @@
+[workspace]
+members = [
+    "contracts/hash-lock",
+    "tests",
+]
+resolver = "2"
+
+[profile.release]
+codegen-units = 1
+debug = 2
+overflow-checks = true
+strip = false
