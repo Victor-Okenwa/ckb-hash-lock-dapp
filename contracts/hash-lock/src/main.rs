@@ -12,13 +12,14 @@ ckb_std::default_alloc!(16384, 1258306, 64);
 use ckb_hash::blake2b_256;
 use ckb_std::{
     ckb_constants::Source,
+    ckb_types::prelude::Entity,
     debug,
-    error::SysError,
     high_level::{load_script, load_witness_args},
 };
 
 const HASH_LEN: usize = 32;
 
+#[derive(Debug, Clone, Copy)]
 #[repr(i8)]
 enum Error {
     ArgsMissing = 1,
@@ -55,7 +56,7 @@ fn run() -> Result<(), Error> {
     // ----- 1. Load our own script and read its args -----
     let script = load_script().map_err(|_| Error::ArgsMissing)?;
     let args = script.args();
-    let args_slices: &[u8] = args.as_ref();
+    let args_slice: &[u8] = args.as_slice();
 
     if args_slice.len() != HASH_LEN {
         return Err(Error::ArgsInvalidLength);
@@ -71,10 +72,7 @@ fn run() -> Result<(), Error> {
     };
 
     // ----- 4. Hash the preimage -----
-    let computed_hash = blake2b_256(preimage.as_ref());
-
-    // ----- 4. Hash the preimage -----
-    let computed_hash = blake2b_256(preimage.as_ref());
+    let computed_hash = blake2b_256(preimage.as_slice());
 
     // ----- 5. Compare with args -----
     if computed_hash.as_slice() != args_slice {
