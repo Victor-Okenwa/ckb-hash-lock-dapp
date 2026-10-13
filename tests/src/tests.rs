@@ -36,7 +36,7 @@ fn build_spend_tx(
     // ----- Input cell: locked by our script -----
     let input_out_point = context.create_cell(
         CellOutput::new_builder()
-            .capacity(1000u64.pack())
+            .capacity(1000u64)
             .lock(lock_script.clone())
             .build(),
         Bytes::new(),
@@ -47,7 +47,7 @@ fn build_spend_tx(
 
     // ----- Output cell: arbitrarily locked with the same script -----
     let output = CellOutput::new_builder()
-        .capacity(1000u64.pack())
+        .capacity(1000u64)
         .lock(lock_script)
         .build();
 
