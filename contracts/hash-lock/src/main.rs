@@ -55,15 +55,10 @@ pub fn program_entry() -> i8 {
 fn run() -> Result<(), Error> {
     // ----- 1. Load our own script and read its args -----
     let script = load_script().map_err(|_| Error::ArgsMissing)?;
-    let args = script.args();
-    let args_slice: &[u8] = args.as_slice();
+    let args = script.args().raw_data();
+    let args_slice: &[u8] = args.as_ref();
 
-    debug!(
-        "args len = {}, expected {}, first bytes = {:?}",
-        args_slice.len(),
-        HASH_LEN,
-        &args_slice[..args_slice.len().min(40)]
-    );
+    debug!("args len = {}", args_slice.len());
 
     if args_slice.len() != HASH_LEN {
         return Err(Error::ArgsInvalidLength);
@@ -74,12 +69,12 @@ fn run() -> Result<(), Error> {
 
     // ----- 3. Extract the preimage from input_type -----
     let preimage = match witness_args.input_type().to_opt() {
-        Some(bytes) => bytes,
+        Some(bytes) => bytes.raw_data(),
         None => return Err(Error::PreImageMissing),
     };
 
     // ----- 4. Hash the preimage -----
-    let computed_hash = blake2b_256(preimage.as_slice());
+    let computed_hash = blake2b_256(preimage.as_ref());
 
     // ----- 5. Compare with args -----
     if computed_hash.as_slice() != args_slice {
