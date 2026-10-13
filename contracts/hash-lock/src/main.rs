@@ -62,6 +62,7 @@ fn run() -> Result<(), Error> {
         return Err(Error::ArgsInvalidLength);
     }
 
+    
     // ----- 2. Load witness args from the first input -----
     let witness_args = load_witness_args(0, Source::Input).map_err(|_| Error::WitnessMissing)?;
 
