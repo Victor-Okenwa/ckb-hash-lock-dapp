@@ -21,7 +21,8 @@ CONTRACT :=
 # contracts are mixed together with new ones, if for some reason you want to
 # revert this behavior, you can change this to anything other than true
 CLEAN_BUILD_DIR_FIRST := true
-BUILD_DIR := build/$(MODE)
+BUILD_DIR := build/release
+
 
 ifeq (release,$(MODE))
 	MODE_ARGS := --release

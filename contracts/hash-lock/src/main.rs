@@ -12,7 +12,7 @@ ckb_std::default_alloc!(16384, 1258306, 64);
 use ckb_hash::blake2b_256;
 use ckb_std::{
     ckb_constants::Source,
-    ckb_types::prelude::Entity,
+    // ckb_types::prelude::Entity,
     debug,
     high_level::{load_script, load_witness_args},
 };
