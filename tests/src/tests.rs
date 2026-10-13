@@ -9,7 +9,7 @@ use ckb_testtool::{
     context::Context,
 };
 
-use crate::verify_and_dump_failed_tx;
+use crate::{Loader, verify_and_dump_failed_tx};
 
 const MAX_CYCLES: u64 = 10_000_000;
 
@@ -20,7 +20,8 @@ const MAX_CYCLES: u64 = 10_000_000;
 /// Deploy the compiled `hash-lock` binary and build a lock script
 /// with the given args.
 fn deploy_lock_script(context: &mut Context, args: Vec<u8>) -> Script {
-    let out_point = context.deploy_cell_by_name("hash-lock");
+    let contract_bin: Bytes = Loader::default().load_binary("hash-lock");
+    let out_point = context.deploy_cell(contract_bin);
     context
         .build_script(&out_point, Bytes::from(args))
         .expect("build lock script")

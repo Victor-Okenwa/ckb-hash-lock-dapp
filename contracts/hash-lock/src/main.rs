@@ -58,11 +58,17 @@ fn run() -> Result<(), Error> {
     let args = script.args();
     let args_slice: &[u8] = args.as_slice();
 
+    debug!(
+        "args len = {}, expected {}, first bytes = {:?}",
+        args_slice.len(),
+        HASH_LEN,
+        &args_slice[..args_slice.len().min(40)]
+    );
+
     if args_slice.len() != HASH_LEN {
         return Err(Error::ArgsInvalidLength);
     }
 
-    
     // ----- 2. Load witness args from the first input -----
     let witness_args = load_witness_args(0, Source::Input).map_err(|_| Error::WitnessMissing)?;
 
