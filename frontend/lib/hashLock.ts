@@ -8,7 +8,7 @@ export const HASH_LOCK_HASH_TYPE = "data2";
 export const HASH_LOCK_CELL_DEP = ccc.CellDep.from({
     outPoint: {
         txHash:
-            "0x5177ea1464564830b3640e3a4f701b19a4c04756e983db9b2adcd917eb30f6b4",
+            "0x4e3475ee95b4ccb25f3c191a3d83fc0358db8033f5af2a9f42a493e213c9acea",
         index: 0,
     },
     depType: "code",

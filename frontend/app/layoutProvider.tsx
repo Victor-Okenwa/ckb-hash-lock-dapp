@@ -9,9 +9,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     const defaultClient = React.useMemo(() => {
         return process.env.NEXT_PUBLIC_IS_MAINNET === "true"
             ? new ccc.ClientPublicMainnet()
-            : new ccc.ClientPublicTestnet({
-                url: "http://127.0.0.1:28114",
-            });
+            : new ccc.ClientPublicTestnet();
     }, []);
 
     return (

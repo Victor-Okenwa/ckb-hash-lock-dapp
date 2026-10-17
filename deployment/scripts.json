@@ -16,6 +16,22 @@
       ]
     }
   },
-  "testnet": {},
+  "testnet": {
+    "hash-lock": {
+      "codeHash": "0x7a5ded487b9d3e1d3b0e32cbdfe551503145f615ccde0601c5ab5f816d5eeb25",
+      "hashType": "data2",
+      "cellDeps": [
+        {
+          "cellDep": {
+            "outPoint": {
+              "txHash": "0x4e3475ee95b4ccb25f3c191a3d83fc0358db8033f5af2a9f42a493e213c9acea",
+              "index": 0
+            },
+            "depType": "code"
+          }
+        }
+      ]
+    }
+  },
   "mainnet": {}
 }
